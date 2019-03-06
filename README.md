@@ -32,5 +32,5 @@ A diferencia de la versión para minimizar latencia que tan solo usa los dos blo
 Este IP ha sido empaquetado usando el código desarrollado por Felipe Veas de la USM. Para poder personalizar sus valores de operación debe ser agregado a la biblioteca local en donde se corre Vivado. El IP se encuentra en una carpeta zip en la siguiente dirección: [UartPort](https://github.com/angello220/Producto_interno/tree/master/HDL/Uart_IP)
 
 ## Interface en Matlab
-Se ha implementado una interface que permite enviar por el puerto serie los vectores que se desean multiplicar y permite recibir el resultado. Esta interface se encuentra en el archivo Dot_Poduct. Genera aleatoriamente 10000 pares de vectores para realizar las pruebas, esta cantidad se puede cambiar modificando el límite del lazo for en donde se realizan las operaciones.
+Se ha implementado una interface que permite enviar por el puerto serie los vectores que se desean multiplicar y permite recibir el resultado. Esta interface se encuentra en el archivo Dot_Product. Genera aleatoriamente 10000 pares de vectores para realizar las pruebas, esta cantidad se puede cambiar modificando el límite del lazo for en donde se realizan las operaciones.
 
