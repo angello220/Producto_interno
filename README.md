@@ -1,6 +1,6 @@
 # Personalizar el Módulo de Producto Interno  
 
-El proyecto del [Producto interno acelerado por hardware](https://github.com/angello220/Producto_interno) fue implementado usando la versión 2018.2.1 de Vivado Desing Suite.
+El proyecto del [Producto interno acelerado por hardware](https://github.com/angello220/Producto_interno) fue implementado usando la versión 2018.2.1 de Vivado Desing Suite. Para má detalles ver: 
 ***
 Para personalizar el tamaño de los vectores que se multiplicarán y el ancho de cada elemento, así como elegir que versión que se desea implementar, ya sea una versión para minimizar latencia o una para maximizar throughput, siga los siguientes pasos:
 
