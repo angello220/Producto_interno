@@ -4,15 +4,15 @@ function Dot_Product()
     % REVISAR SI EL PUERTO SERIE ESTA ABIERTO NO NO
     checkPortOpen();
 
-    %% PAR¡METROS DEL FUNCIONAMIENTO DE PRODUCTO PUNTO
+    %% PAR√ÅMETROS DEL FUNCIONAMIENTO DE PRODUCTO PUNTO
     N=240;      % Define el numero de elementos de cada vector
-                % R+S N˙mero total de bits que tendr· la representaciÛn
+                % R+S N√∫mero total de bits que tendr√° la representaci√≥n
                 % Para cambiar R+S es necesario generar otro bitstream
-    R=8;        % N˙mero de bits de la parte entera (enviados)
-    S=0;       % N˙mero de bits de la parte fraccionaria  (enviados)
+    R=8;        % N√∫mero de bits de la parte entera (enviados)
+    S=0;       % N√∫mero de bits de la parte fraccionaria  (enviados)
    [P,BPC,E,F,BYT,NBY] = setParameters(R,S);
       
-    %% CONFIGURACI”N DEL PUERTO SERIE
+    %% CONFIGURACI√ìN DEL PUERTO SERIE
     Serie=serial('COM4');
     set(Serie,'BaudRate',115200);
     set(Serie,'DataBits',8);
@@ -26,10 +26,10 @@ function Dot_Product()
 
     %% PRODUCTO PUNTO ENTRE LOS VECTORES COLUMNA A Y B
     for i=1:1:1000
-        % GENERAR N⁄MEROS ALEATORIOS ENTRE -2^(P-1)-1< X < 2^(P-1)-1
+        % GENERAR N√öMEROS ALEATORIOS ENTRE -2^(P-1)-1< X < 2^(P-1)-1
         rng(i*8000); %Para obtener siempre los mismos vectores A y B 
-        A_real = ceil(random([N,1],-1,1)*(2^(P-1)-1));    % Valor Real A parte entera 
-        B_real = ceil(random([N,1],-1,1)*(2^(P-1)-1));    % Valor Real B parte entera 
+        A_real = ceil(IntervalRand([N,1],-1,1)*(2^(P-1)-1));    % Valor Real A parte entera 
+        B_real = ceil(IntervalRand([N,1],-1,1)*(2^(P-1)-1));    % Valor Real B parte entera 
         % OBTENER EL COMPLEMENTO A2: SI ES POSITIVO QUEDA IGUAL
         A_a2 = dec2twos(A_real,R+S);         % Complemento a2 de A 
         B_a2 = dec2twos(B_real,R+S);         % Complemento a2 de B 
@@ -77,7 +77,7 @@ function Dot_Product()
 end
 
 %% FUNCIONES NECESARIAS IMPLEMETADAS Y MODIFICADAS DE MATLAB
-% Convierte el n˙mero recibido por el puerto serie a su equivalente decimal
+% Convierte el n√∫mero recibido por el puerto serie a su equivalente decimal
 function [sal]= converter(dec,BYT,N,E,F)
     tot='';
     % Primero se obtiene una cadena de bits que corresponden al complemento
@@ -97,19 +97,19 @@ function [sal]= converter(dec,BYT,N,E,F)
     sal=sg*(entera+fraccion);
 end
 %==========================================================================
-% FunciÛn que recibe un n˙mero en binario correspondiente a la parte
-% fraccionaria del total y calcula su representaciÛn decimal.
+% Funci√≥n que recibe un n√∫mero en binario correspondiente a la parte
+% fraccionaria del total y calcula su representaci√≥n decimal.
 function sum = bin2frac(bin,N) 
     sum=0;
     for p=1:1:N
-        % Cada bit del n˙mero binario tiene un peso correspondiente a la
-        % posiciÛn que ocupa. Este peso viene dado por un potencia inversa
-        % de 2: peso=1/2^p donde p es la posiciÛn del bit dentro del n˙mero
+        % Cada bit del n√∫mero binario tiene un peso correspondiente a la
+        % posici√≥n que ocupa. Este peso viene dado por un potencia inversa
+        % de 2: peso=1/2^p donde p es la posici√≥n del bit dentro del n√∫mero
         sum=sum+str2double(bin(p))*(1/(2^p));
     end
 end
 %==========================================================================
-% Toma un vector A con los n˙meros generados aleatoriamente y obtiene cual
+% Toma un vector A con los n√∫meros generados aleatoriamente y obtiene cual
 % es el decimal que representa una vez que se ha enviado al device en forma
 % del complemento a2.
 function X=getDecimal(A,Q,R)
@@ -133,8 +133,8 @@ function X=getDecimal(A,Q,R)
     end
 end
 %==========================================================================
-% Toma el vector A que contiene n˙meros en binario en complemento a2 y
-% genera el vector que se eviar· al device para que realice el producto
+% Toma el vector A que contiene n√∫meros en binario en complemento a2 y
+% genera el vector que se eviar√° al device para que realice el producto
 % punto requerido.
 function vec = makeVector(A,NBY)
     vec=[];
@@ -147,12 +147,12 @@ function vec = makeVector(A,NBY)
     end
 end
 %==========================================================================
-% Convierte un n˙mero decimal a su representaciÛn en complemento a2
+% Convierte un n√∫mero decimal a su representaci√≥n en complemento a2
 function val = dec2twos(A,N)
     val=dec2bin(mod(A,2^N),N);
 end
 %==========================================================================
-% FunciÛn para obtener el complemento a2
+% Funci√≥n para obtener el complemento a2
 function [tw,sg] = twos2(bin)
     sgn=str2double(bin(1));
     N=size(bin,2);
@@ -176,7 +176,7 @@ function [tw,sg] = twos2(bin)
     end
 end
 %==========================================================================
-% Cambia unos por ceros y viceversa. Se usa en la funciÛn twos2dec
+% Cambia unos por ceros y viceversa. Se usa en la funci√≥n twos2dec
 function ch = toggle(bin)
     ch='';
     for h=size(bin,2):-1:1
@@ -202,14 +202,18 @@ function checkPortOpen()
 end
 %==========================================================================
 function [P,BPC,E,F,BYT,NBY]= setParameters(R,S)
-  P=R+S;           % Potencia m·xima para generar los datos decimales
+  P=R+S;           % Potencia m√°xima para generar los datos decimales
                    % (1 bit para el signo), rango: -2^(P-1)-1 -> 2^(P-1)-1
-  E=R*2+8;         % N˙mero de bits recibidos desde el device - entera
-  F=S*2;           % N˙mero de bits recibidos desde el device - fraccionaria
-  BYT=(E+F)/8;     % N˙mero de bytes recibidos desde el device 
-  BPC=F+E;         % TamaÒo en bits del vector enviado desde el device
-  NBY=(R+S)/8;     % N˙mero de bytes enviados al device
+  E=R*2+8;         % N√∫mero de bits recibidos desde el device - entera
+  F=S*2;           % N√∫mero de bits recibidos desde el device - fraccionaria
+  BYT=(E+F)/8;     % N√∫mero de bytes recibidos desde el device 
+  BPC=F+E;         % Tama√±o en bits del vector enviado desde el device
+  NBY=(R+S)/8;     % N√∫mero de bytes enviados al device
 end
+%   =======================================================================
+function r = IntervalRand(dim, a, b)
+%   Genera n√∫meros o vectores de n√∫meros aleatorios en el intervalo [a,b]
+r = a + (b-a).*rand(dim);
 %==========================================================================
 % FUNCION ORIGINAL DE MATLAB MODIFICADA PARA QUE PERMITA MAS DE 52Bits
 function x=Nbin2dec(s,N)
