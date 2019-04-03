@@ -14,7 +14,7 @@ Aquí podrá elegir el tamaño N de los vectores el ancho n de cada elemento, co
 
 ## Cambiar la velocidad de transmisión de datos:
 
-Puede establecer el baut rate de la transmisión de datos entre la terjeta FPGA y el computador personalizando el IP UartPort, como se muestra:
+Puede establecer el baud rate de la transmisión de datos entre la tarjeta FPGA y el computador personalizando el IP UartPort, como se muestra:
 
 ![](https://github.com/angello220/Images/blob/master/Producto_interno/Captura3.PNG)
 
